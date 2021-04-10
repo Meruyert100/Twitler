@@ -23,6 +23,8 @@ class RegisterViewController: UIViewController {
     
     var imageFilePath = ""
     
+    var fileName = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
@@ -49,7 +51,8 @@ class RegisterViewController: UIViewController {
                                 "uid" : uid,
                                 "username" : name + " " + lastname,
                                 "dateofbirth" : self.dateOfBirth!,
-                                "profimage" : self.imageFilePath
+                                "profimage" : self.imageFilePath,
+                                "imagename" : self.fileName,
                             ]
                             Database.database().reference().child("users").child(uid).setValue(regObject)
                             self.performSegue(withIdentifier: Twitler.registerSegue, sender: self)
@@ -70,7 +73,7 @@ class RegisterViewController: UIViewController {
     
     private func saveUserImage() {
         let image = userImageView.image
-        let fileName = NSUUID().uuidString
+        fileName = NSUUID().uuidString
         let profileImagesRef = Storage.storage().reference().child("profile_images/\(fileName)")
         
         guard let uploadData = image!.jpegData(compressionQuality: 0.3) else {
