@@ -60,6 +60,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13585954262237FB0048F65A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				138886D0261F848500BA8155 /* RegisterViewController.swift */,
+				13B458B526208479001763C8 /* LoginViewController.swift */,
+				13B458B826208617001763C8 /* HomeViewController.swift */,
+				13B458BB26208808001763C8 /* ProfileViewController.swift */,
+				137CBCAA2621754E0024D796 /* TweetDetailsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		13585955262238300048F65A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				13B458F82620BCA2001763C8 /* Tweet.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		135859562622383D0048F65A /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				13B458B226207F7F001763C8 /* Constants.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		135859572622384F0048F65A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				13585959262238750048F65A /* Cell */,
+				13585958262238610048F65A /* Storyboards */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		13585958262238610048F65A /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				138886D7261F848900BA8155 /* LaunchScreen.storyboard */,
+				138886D2261F848500BA8155 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		13585959262238750048F65A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				13B458F42620B812001763C8 /* TweetTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		1358595A262238800048F65A /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				138886CC261F848500BA8155 /* AppDelegate.swift */,
+				138886CE261F848500BA8155 /* SceneDelegate.swift */,
+				138886D5261F848900BA8155 /* Assets.xcassets */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
 		138886C0261F848500BA8155 = {
 			isa = PBXGroup;
 			children = (
@@ -81,21 +145,13 @@
 		138886CB261F848500BA8155 /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
-				138886CC261F848500BA8155 /* AppDelegate.swift */,
-				138886CE261F848500BA8155 /* SceneDelegate.swift */,
-				138886D0261F848500BA8155 /* RegisterViewController.swift */,
-				138886D2261F848500BA8155 /* Main.storyboard */,
-				138886D5261F848900BA8155 /* Assets.xcassets */,
-				138886D7261F848900BA8155 /* LaunchScreen.storyboard */,
+				1358595A262238800048F65A /* Supporting files */,
+				135859562622383D0048F65A /* Helper */,
+				13585955262238300048F65A /* Model */,
+				135859572622384F0048F65A /* Views */,
+				13585954262237FB0048F65A /* Controllers */,
 				138886DA261F848900BA8155 /* Info.plist */,
 				138886E1261F887200BA8155 /* GoogleService-Info.plist */,
-				13B458B226207F7F001763C8 /* Constants.swift */,
-				13B458B526208479001763C8 /* LoginViewController.swift */,
-				13B458B826208617001763C8 /* HomeViewController.swift */,
-				13B458BB26208808001763C8 /* ProfileViewController.swift */,
-				13B458F42620B812001763C8 /* TweetTableViewCell.swift */,
-				13B458F82620BCA2001763C8 /* Tweet.swift */,
-				137CBCAA2621754E0024D796 /* TweetDetailsViewController.swift */,
 			);
 			path = Twitter;
 			sourceTree = "<group>";

@@ -8,17 +8,13 @@
 import UIKit
 import Firebase
 
-protocol UserDetails {
-    
-}
-
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var hashtagSearchBar: UISearchBar!
     @IBOutlet weak var tweetsTableView: UITableView!
     @IBOutlet weak var tweetTextField: UITextField!
     
-    var username: String?
+    var mainUsername: String?
     
     var tweets: [Tweet] = []
     
@@ -51,9 +47,11 @@ class HomeViewController: UIViewController {
                     let username = tweet["username"] as? String ?? ""
                     let content = tweet["tweet"] as? String ?? ""
                     let date = tweet["date"] as? String ?? ""
-                    let tweetie = Tweet(key: key, username: username, body: content, date: date)
+                    let id = tweet["uid"] as? String ?? ""
+                    let sortDate = tweet["dateforsort"] as? String ?? ""
+                    let tweetie = Tweet(key: key, username: username, body: content, date: date, userId: id, dateForSort: sortDate)
                     self.tweets.append(tweetie)
-                    
+                    self.tweets.sort{"\($0.dateForSort)" > "\($1.dateForSort)"}
                     DispatchQueue.main.async {
                         self.tweetsTableView.reloadData()
                     }
@@ -67,6 +65,15 @@ class HomeViewController: UIViewController {
     
     private func getDate() -> String {
         let timestamp = DateFormatter.localizedString(from: NSDate() as Date, dateStyle: .medium, timeStyle: .short)
+        return timestamp
+    }
+    
+    private func createSortDate() -> String {
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let timestamp = format.string(from: date)
+
         return timestamp
     }
     
@@ -84,10 +91,11 @@ class HomeViewController: UIViewController {
         let unique = uid + randomString(length: 3)
         
         let regObject: Dictionary<String, Any> = [
-            "uid" : uid,
-            "username" : username!,
+            "uid": uid,
+            "username": mainUsername!,
             "tweet": tweetTextField.text!,
-            "date": getDate()
+            "date": getDate(),
+            "dateforsort": createSortDate()
         ]
         
         Database.database().reference().child("tweets").child(unique).setValue(regObject)
@@ -106,7 +114,7 @@ class HomeViewController: UIViewController {
         DispatchQueue.main.async {
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? NSDictionary
-                self.username = value?["username"] as? String
+                self.mainUsername = value?["username"] as? String
               }) { (error) in
                 print(error.localizedDescription)
             }
@@ -136,11 +144,13 @@ class HomeViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         guard let destVC = segue.destination as? TweetDetailsViewController else { return }
         guard let cell = sender as? TweetTableViewCell,
               let indexPath = tweetsTableView.indexPath(for: cell) else { return }
         let tweet = tweets[indexPath.row]
         destVC.tweet = tweet
+        
     }
     
 }
@@ -160,6 +170,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     

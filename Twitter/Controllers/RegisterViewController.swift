@@ -40,11 +40,12 @@ class RegisterViewController: UIViewController {
        
         if let name = nameTextField.text, let lastname = lastnameTextField.text, let email = emailTextField.text, let password = passwordTextField.text {
             
-            Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                if let e = error {
-                    print(e)
-                } else {
-//                    if (self.imageFilePath != "") {
+            if (self.imageFilePath != "") {
+                Auth.auth().createUser(withEmail: email, password: password) { result, error in
+                    if let e = error {
+                        print(e)
+                    } else {
+                        
                         if let uid = Auth.auth().currentUser?.uid {
                             
                             let regObject: Dictionary<String, Any> = [
@@ -55,16 +56,16 @@ class RegisterViewController: UIViewController {
                                 "imagename" : self.fileName,
                             ]
                             Database.database().reference().child("users").child(uid).setValue(regObject)
-                            self.performSegue(withIdentifier: Twitler.registerSegue, sender: self)
-                            
                         }
-//                        else {
-//                            let alert = UIAlertController(title: "Please wait", message: "Your image has not finished uploading yet, please wait...", preferredStyle: .alert)
-//                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//                            self.present(alert, animated: true, completion: nil)
-//                        }
-//                    }
+                        
+                        
+                        self.performSegue(withIdentifier: Twitler.registerSegue, sender: self)
+                    }
                 }
+            } else {
+                let alert = UIAlertController(title: "Try again", message: "Your image has not finished uploading yet, please wait...", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
             
             

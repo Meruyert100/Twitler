@@ -11,6 +11,5 @@ struct Twitler {
     static let registerSegue = "RegisterToHome"
     static let loginSegue = "LoginToHome"
     static let cellIdentifier = "tweetCell"
-
 }
 

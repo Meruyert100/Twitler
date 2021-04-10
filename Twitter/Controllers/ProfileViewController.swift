@@ -24,6 +24,10 @@ class ProfileViewController: UIViewController {
     var imageFilePath = ""
     var newImageFilePath = ""
     
+    var newImageName = ""
+    
+    var imageIsChanged = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
@@ -70,13 +74,47 @@ class ProfileViewController: UIViewController {
     }
 
     @objc func homeButtonPressed() {
-        saveChanges()
+        if newImageFilePath != "" || !imageIsChanged {
+            saveChanges()
+        } else {
+            let alert = UIAlertController(title: "Please wait", message: "Your image has not finished uploading yet, please wait...", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
         navigationController?.popViewController(animated: true)
     }
     
     private func saveChanges() {
-        let values = ["username": usernameTextField.text! , "dateofbirth": birthdayTextField.text!, "profimage": newImageFilePath] as [String : Any]
-        let _ = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(values)
+        var values: [String: Any]?
+        if imageIsChanged {
+            values = ["username": usernameTextField.text! , "dateofbirth": birthdayTextField.text!, "profimage": newImageFilePath, "imagename": newImageName] as [String : Any]
+        } else {
+            values = ["username": usernameTextField.text! , "dateofbirth": birthdayTextField.text!] as [String : Any]
+        }
+        let _ = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(values!)
+        updateTweets()
+    }
+    
+    private func updateTweets() {
+
+        let ref = Database.database().reference().child("tweets")
+        
+        ref.observe(DataEventType.value, with: { (snapshot) in
+            if let snap = snapshot.children.allObjects as? [DataSnapshot]{
+
+                for (_,val) in snap.enumerated(){
+                    let key = val.key
+                    let tweet: [String: Any] = val.value as! [String : Any]
+                    let id = tweet["uid"] as? String ?? ""
+                    if id == Auth.auth().currentUser!.uid {
+                        let _ = Database.database().reference().child("tweets").child(key).updateChildValues(["username": self.usernameTextField.text!])
+                    }
+                }
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    
     }
     
     private func getDate() -> String {
@@ -86,7 +124,8 @@ class ProfileViewController: UIViewController {
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        imageIsChanged = true
+        _ = tapGestureRecognizer.view as! UIImageView
 
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
             imagePicker.allowsEditing = true
@@ -108,12 +147,12 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    private func saveUserImage(image: UIImage) {
+    private func saveUserImage() {
+        let image = avatarImageView.image
+        newImageName = NSUUID().uuidString
+        let profileImagesRef = Storage.storage().reference().child("profile_images/\(newImageName)")
         
-        let fileName = NSUUID().uuidString
-        let profileImagesRef = Storage.storage().reference().child("profile_images/\(fileName)")
-        
-        guard let uploadData = image.jpegData(compressionQuality: 0.3) else {
+        guard let uploadData = image?.jpegData(compressionQuality: 0.3) else {
             return
         }
         
@@ -132,7 +171,6 @@ class ProfileViewController: UIViewController {
                 }
                 
                 self.newImageFilePath = downloadURL.absoluteString
- 
             })
         })
     }
@@ -145,7 +183,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             DispatchQueue.main.async {
                 self.deleteLastImage()
                 self.avatarImageView.image = pickedImage
-                self.saveUserImage(image: pickedImage)
+                self.saveUserImage()
             }
         }
         picker.dismiss(animated: true, completion: nil)

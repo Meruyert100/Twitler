@@ -12,4 +12,6 @@ struct Tweet: Codable {
     let username: String
     let body: String
     let date: String
+    let userId: String
+    let dateForSort: String
 }

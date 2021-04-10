@@ -12,11 +12,20 @@ class TweetDetailsViewController: UIViewController {
 
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet weak var tweetTextField: UITextField!
+    @IBOutlet weak var editButton: UIButton!
     
     var tweet: Tweet?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if tweet!.userId != Auth.auth().currentUser!.uid {
+            navigationItem.rightBarButtonItem?.image = nil
+            navigationItem.rightBarButtonItem?.isEnabled = false
+            navigationItem.rightBarButtonItem?.tintColor = .clear
+            editButton.isHidden = true
+            tweetTextField.borderStyle = .none
+            tweetTextField.isEnabled = false
+        }
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(homeButtonPressed))
         navigationItem.leftBarButtonItem?.tintColor = .white

@@ -31,7 +31,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1234567" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a0D-Mp-8se">
                                 <rect key="frame" x="64" y="405" width="287" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYr-HR-f9X">
                                 <rect key="frame" x="147" y="528" width="120" height="36"/>
@@ -147,6 +147,7 @@
                                                 <constraint firstItem="ocl-Rc-mMg" firstAttribute="top" secondItem="tzg-bt-XqL" secondAttribute="bottom" constant="8" symbolic="YES" id="TBR-De-YbW"/>
                                                 <constraint firstItem="CEW-tc-PJz" firstAttribute="leading" secondItem="tsL-3a-Bf4" secondAttribute="leading" constant="20" symbolic="YES" id="YFh-GU-Y2G"/>
                                                 <constraint firstItem="tzg-bt-XqL" firstAttribute="top" secondItem="tsL-3a-Bf4" secondAttribute="top" constant="11" id="e15-32-WJK"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CEW-tc-PJz" secondAttribute="trailing" constant="20" symbolic="YES" id="hLD-dW-UX7"/>
                                                 <constraint firstItem="ocl-Rc-mMg" firstAttribute="leading" secondItem="tsL-3a-Bf4" secondAttribute="leading" constant="20" symbolic="YES" id="q1x-jX-OQt"/>
                                                 <constraint firstAttribute="bottom" secondItem="CEW-tc-PJz" secondAttribute="bottom" constant="11.5" id="y1R-bB-qPs"/>
                                             </constraints>
@@ -168,12 +169,15 @@
                                 <rect key="frame" x="0.0" y="800" width="414" height="96"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YW6-FG-1s6">
-                                        <rect key="frame" x="18" y="24" width="310" height="34"/>
+                                        <rect key="frame" x="18" y="24" width="296" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="we1-sx-Yhg">
-                                        <rect key="frame" x="362" y="30" width="21" height="22"/>
+                                        <rect key="frame" x="348" y="30" width="35" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="efe-OX-d16"/>
+                                        </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="paperplane.fill" catalog="system"/>
                                         <connections>
@@ -346,7 +350,7 @@
                                     <constraint firstAttribute="height" constant="34" id="Oow-5H-Bem"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcs-Sm-qQT">
                                 <rect key="frame" x="334" y="132" width="25" height="22"/>
@@ -467,6 +471,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="MbG-OT-cvS" id="6uX-24-YjB"/>
                         <outlet property="tweetTextField" destination="lfu-Ke-dyA" id="Mtp-A0-4OG"/>
                         <outlet property="usernameLabel" destination="fa5-bL-eRx" id="NKR-kF-BY8"/>
                     </connections>
