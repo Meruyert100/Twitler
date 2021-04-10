@@ -23,12 +23,15 @@ class HomeViewController: UIViewController {
     var tweets: [Tweet] = []
     
     var ref: DatabaseReference!
+    
+    var searchedTweets: [Tweet] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         loadInfo()
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logOutButtonPressed))
+        navigationItem.leftBarButtonItem?.tintColor = .white
         
         loadTweets()
 
@@ -43,11 +46,12 @@ class HomeViewController: UIViewController {
                 self.tweets = []
 
                 for (_,val) in snap.enumerated(){
+                    let key = val.key
                     let tweet: [String: Any] = val.value as! [String : Any]
                     let username = tweet["username"] as? String ?? ""
                     let content = tweet["tweet"] as? String ?? ""
                     let date = tweet["date"] as? String ?? ""
-                    let tweetie = Tweet(username: username, body: content, date: date)
+                    let tweetie = Tweet(key: key, username: username, body: content, date: date)
                     self.tweets.append(tweetie)
                     
                     DispatchQueue.main.async {
@@ -70,6 +74,7 @@ class HomeViewController: UIViewController {
     @IBAction func tweetButtonPressed(_ sender: Any) {
         addTweetToDB()
         loadTweets()
+        tweetTextField.text = ""
     }
     
     private func addTweetToDB() {
@@ -119,6 +124,25 @@ class HomeViewController: UIViewController {
         }
     }
     
+    private func searchTweets(string: String) {
+        searchedTweets = []
+        for tweet in tweets {
+            if tweet.body.contains(string) || tweet.body.contains(string.lowercased()) {
+                searchedTweets.append(tweet)
+            }
+        }
+        tweets = searchedTweets
+        tweetsTableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destVC = segue.destination as? TweetDetailsViewController else { return }
+        guard let cell = sender as? TweetTableViewCell,
+              let indexPath = tweetsTableView.indexPath(for: cell) else { return }
+        let tweet = tweets[indexPath.row]
+        destVC.tweet = tweet
+    }
+    
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -139,4 +163,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+}
+
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let searchText = searchBar.text!
+        searchTweets(string: searchText)
+
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == ""
+        {
+            searchBar.perform(#selector(self.resignFirstResponder), with: nil, afterDelay: 0)
+            loadTweets()
+        }
+    }
 }

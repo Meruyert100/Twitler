@@ -25,7 +25,10 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationItem.hidesBackButton = true
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(logInButtonPressed))
+        navigationItem.leftBarButtonItem?.tintColor = .white
         imagePicker.delegate = self
     }
     
@@ -116,6 +119,10 @@ class RegisterViewController: UIViewController {
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         dateOfBirth = formatter.string(from: datePickerView.date)
+    }
+    
+    @objc func logInButtonPressed() {
+        navigationController?.popViewController(animated: true)
     }
     
 }

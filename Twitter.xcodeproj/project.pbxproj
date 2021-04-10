@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		137CBCA7262171700024D796 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 137CBCA6262171700024D796 /* IQKeyboardManagerSwift */; };
+		137CBCAB2621754E0024D796 /* TweetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137CBCAA2621754E0024D796 /* TweetDetailsViewController.swift */; };
 		138886CD261F848500BA8155 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138886CC261F848500BA8155 /* AppDelegate.swift */; };
 		138886CF261F848500BA8155 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138886CE261F848500BA8155 /* SceneDelegate.swift */; };
 		138886D1261F848500BA8155 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138886D0261F848500BA8155 /* RegisterViewController.swift */; };
@@ -24,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		137CBCAA2621754E0024D796 /* TweetDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetDetailsViewController.swift; sourceTree = "<group>"; };
 		138886C9261F848500BA8155 /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		138886CC261F848500BA8155 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		138886CE261F848500BA8155 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +53,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D73D9B4F2CD1C804F0CCB89A /* Pods_Twitter.framework in Frameworks */,
+				137CBCA7262171700024D796 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +95,7 @@
 				13B458BB26208808001763C8 /* ProfileViewController.swift */,
 				13B458F42620B812001763C8 /* TweetTableViewCell.swift */,
 				13B458F82620BCA2001763C8 /* Tweet.swift */,
+				137CBCAA2621754E0024D796 /* TweetDetailsViewController.swift */,
 			);
 			path = Twitter;
 			sourceTree = "<group>";
@@ -130,6 +135,9 @@
 			dependencies = (
 			);
 			name = Twitter;
+			packageProductDependencies = (
+				137CBCA6262171700024D796 /* IQKeyboardManagerSwift */,
+			);
 			productName = Twitter;
 			productReference = 138886C9261F848500BA8155 /* Twitter.app */;
 			productType = "com.apple.product-type.application";
@@ -157,6 +165,9 @@
 				Base,
 			);
 			mainGroup = 138886C0261F848500BA8155;
+			packageReferences = (
+				137CBCA5262171700024D796 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			productRefGroup = 138886CA261F848500BA8155 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -229,6 +240,7 @@
 			files = (
 				13B458B62620847A001763C8 /* LoginViewController.swift in Sources */,
 				13B458B326207F7F001763C8 /* Constants.swift in Sources */,
+				137CBCAB2621754E0024D796 /* TweetDetailsViewController.swift in Sources */,
 				138886D1261F848500BA8155 /* RegisterViewController.swift in Sources */,
 				13B458F92620BCA2001763C8 /* Tweet.swift in Sources */,
 				138886CD261F848500BA8155 /* AppDelegate.swift in Sources */,
@@ -439,6 +451,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		137CBCA5262171700024D796 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		137CBCA6262171700024D796 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 137CBCA5262171700024D796 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 138886C1261F848500BA8155 /* Project object */;
 }

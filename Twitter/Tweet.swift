@@ -8,6 +8,7 @@
 import Foundation
 
 struct Tweet: Codable {
+    let key: String
     let username: String
     let body: String
     let date: String

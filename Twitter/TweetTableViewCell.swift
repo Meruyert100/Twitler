@@ -23,12 +23,4 @@ class TweetTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
-    @IBAction func editButtonPressed(_ sender: Any) {
-    }
-    
-    
-    @IBAction func deleteButtonPressed(_ sender: Any) {
-    }
-    
 }

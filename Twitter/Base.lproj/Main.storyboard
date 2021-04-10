@@ -139,32 +139,12 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cus-w6-Vde">
-                                                    <rect key="frame" x="385" y="162" width="17.5" height="22"/>
-                                                    <state key="normal" image="pencil" catalog="system"/>
-                                                    <connections>
-                                                        <action selector="editButtonPressed:" destination="ATj-DW-VCG" eventType="touchUpInside" id="cpu-p6-aGx"/>
-                                                        <segue destination="o4h-sC-yVZ" kind="show" id="sWU-aN-Wbu"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WwS-d1-s14">
-                                                    <rect key="frame" x="358" y="162" width="19.5" height="22"/>
-                                                    <state key="normal" image="trash.fill" catalog="system"/>
-                                                    <connections>
-                                                        <action selector="deleteButtonPressed:" destination="ATj-DW-VCG" eventType="touchUpInside" id="r4M-ml-Q28"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="cus-w6-Vde" firstAttribute="leading" secondItem="WwS-d1-s14" secondAttribute="trailing" constant="7.5" id="4t6-e9-obh"/>
-                                                <constraint firstAttribute="bottom" secondItem="WwS-d1-s14" secondAttribute="bottom" constant="12" id="5Bf-Gr-QfD"/>
                                                 <constraint firstItem="tzg-bt-XqL" firstAttribute="leading" secondItem="tsL-3a-Bf4" secondAttribute="leading" constant="20" symbolic="YES" id="Cyt-Xv-hgI"/>
                                                 <constraint firstAttribute="trailing" secondItem="ocl-Rc-mMg" secondAttribute="trailing" constant="20" symbolic="YES" id="K5g-1y-vpi"/>
                                                 <constraint firstAttribute="trailing" secondItem="tzg-bt-XqL" secondAttribute="trailing" constant="20" symbolic="YES" id="Ojr-Lk-pAB"/>
                                                 <constraint firstItem="ocl-Rc-mMg" firstAttribute="top" secondItem="tzg-bt-XqL" secondAttribute="bottom" constant="8" symbolic="YES" id="TBR-De-YbW"/>
-                                                <constraint firstAttribute="bottom" secondItem="cus-w6-Vde" secondAttribute="bottom" constant="12" id="USH-Y3-C7F"/>
-                                                <constraint firstAttribute="trailing" secondItem="cus-w6-Vde" secondAttribute="trailing" constant="11.5" id="XHE-Uy-osx"/>
-                                                <constraint firstItem="WwS-d1-s14" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CEW-tc-PJz" secondAttribute="trailing" constant="8" symbolic="YES" id="Y8Q-MY-doY"/>
                                                 <constraint firstItem="CEW-tc-PJz" firstAttribute="leading" secondItem="tsL-3a-Bf4" secondAttribute="leading" constant="20" symbolic="YES" id="YFh-GU-Y2G"/>
                                                 <constraint firstItem="tzg-bt-XqL" firstAttribute="top" secondItem="tsL-3a-Bf4" secondAttribute="top" constant="11" id="e15-32-WJK"/>
                                                 <constraint firstItem="ocl-Rc-mMg" firstAttribute="leading" secondItem="tsL-3a-Bf4" secondAttribute="leading" constant="20" symbolic="YES" id="q1x-jX-OQt"/>
@@ -175,6 +155,7 @@
                                             <outlet property="dateLabel" destination="CEW-tc-PJz" id="ZyZ-Wn-kCp"/>
                                             <outlet property="tweetLabel" destination="ocl-Rc-mMg" id="wL0-ds-ZQe"/>
                                             <outlet property="usernameLabel" destination="tzg-bt-XqL" id="7r7-3g-xvM"/>
+                                            <segue destination="o4h-sC-yVZ" kind="show" identifier="HomeToTweet" id="JFO-aY-y1S"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -230,6 +211,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="BUl-ir-r9D">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="person.circle" catalog="system" id="brL-ET-0C2">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="VUp-3r-7vl" kind="show" identifier="HomeToProfile" id="sjH-Hz-yhg"/>
                             </connections>
@@ -368,6 +350,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcs-Sm-qQT">
                                 <rect key="frame" x="334" y="132" width="25" height="22"/>
+                                <color key="tintColor" name="BrandBlue"/>
                                 <state key="normal" image="camera.fill" catalog="system"/>
                                 <connections>
                                     <action selector="cameraButtonPressed:" destination="FR6-EF-Mpj" eventType="touchUpInside" id="tfl-Y6-rpS"/>
@@ -375,6 +358,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGB-Jj-K7y">
                                 <rect key="frame" x="332" y="162" width="27" height="22"/>
+                                <color key="tintColor" name="BrandBlue"/>
                                 <state key="normal" image="photo.on.rectangle.angled" catalog="system"/>
                                 <connections>
                                     <action selector="galleryButtonPressed:" destination="FR6-EF-Mpj" eventType="touchUpInside" id="H4R-qk-Mdv"/>
@@ -429,10 +413,10 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="811.60714285714278"/>
         </scene>
-        <!--View Controller-->
+        <!--Tweet Details View Controller-->
         <scene sceneID="1ZI-nG-5lp">
             <objects>
-                <viewController id="o4h-sC-yVZ" sceneMemberID="viewController">
+                <viewController id="o4h-sC-yVZ" customClass="TweetDetailsViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4cZ-Tg-oqv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -450,6 +434,9 @@
                                 <state key="normal" title="Edit">
                                     <color key="titleColor" name="BrandLightBlue"/>
                                 </state>
+                                <connections>
+                                    <action selector="editButtonPressed:" destination="o4h-sC-yVZ" eventType="touchUpInside" id="0DD-at-EYY"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Tweet" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lfu-Ke-dyA">
                                 <rect key="frame" x="20" y="202.5" width="374" height="34"/>
@@ -471,7 +458,18 @@
                             <constraint firstItem="fa5-bL-eRx" firstAttribute="top" secondItem="2cC-ZL-wuv" secondAttribute="top" constant="28" id="zxs-sE-qBz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="iKR-m6-3KR"/>
+                    <navigationItem key="navigationItem" id="iKR-m6-3KR">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="trash.fill" catalog="system" id="1uE-fH-g8R">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="trashButtonPressed:" destination="o4h-sC-yVZ" id="Box-Ex-y5J"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tweetTextField" destination="lfu-Ke-dyA" id="Mtp-A0-4OG"/>
+                        <outlet property="usernameLabel" destination="fa5-bL-eRx" id="NKR-kF-BY8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jpo-7U-qHR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -507,7 +505,6 @@
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
-        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>

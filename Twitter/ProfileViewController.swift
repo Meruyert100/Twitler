@@ -20,7 +20,9 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(homeButtonPressed))
+        navigationItem.leftBarButtonItem?.tintColor = .white
         loadInfo()
     }
 
@@ -54,4 +56,11 @@ class ProfileViewController: UIViewController {
         }
     }
 
+    @objc func homeButtonPressed() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func saveChanges() {
+        
+    }
 }
