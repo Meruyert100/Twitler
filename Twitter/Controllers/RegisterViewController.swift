@@ -83,22 +83,26 @@ class RegisterViewController: UIViewController {
         
         profileImagesRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
             if error != nil {
-                return
+                print(error?.localizedDescription ?? "error")
             }
             
+            
+
             profileImagesRef.downloadURL(completion: { [self] (downloadURL, error) in
                 if error != nil {
-                    return
+                    print(error?.localizedDescription ?? "error")
                 }
-                
+
                 guard let downloadURL = downloadURL else {
+                    print("here2")
                     return
                 }
-                
+
                 self.imageFilePath = downloadURL.absoluteString
- 
+                print("here3")
             })
         })
+        
     }
     
     @IBAction func cameraButtonPressed(_ sender: Any) {
